@@ -81,8 +81,7 @@ def head_hunter_salaries():
 
     return ('HeadHunter Moscow', salaries_by_language)
 
-def get_sj_mean_salaries(language):
-    superjob_key = os.getenv('SUPJOB_KEY')
+def get_sj_mean_salaries(superjob_key,language):
     headers = {
         'X-Api-App-Id':superjob_key
     }
@@ -121,10 +120,10 @@ def get_sj_mean_salaries(language):
                 'average_salary': 0,
             }
 
-def supejob_salaries():
+def supejob_salaries(superjob_key):
     salaries_by_language={}
     for language in PROGRAMMING_LANGUAGES:
-        salaries_by_language[language] = get_sj_mean_salaries(language)
+        salaries_by_language[language] = get_sj_mean_salaries(superjob_key, language)
     return ('SuperJob Moscow', salaries_by_language)
 
 def tablify(title, dictionary):
@@ -146,10 +145,11 @@ def tablify(title, dictionary):
 
 def main():
     load_dotenv()
+    superjob_key = os.getenv('SUPJOB_KEY')
 
     title, stats = head_hunter_salaries()
     tablify(title, stats)
-    title, stats = supejob_salaries()
+    title, stats = supejob_salaries(superjob_key)
     tablify(title, stats)
 
 if __name__ == "__main__":
