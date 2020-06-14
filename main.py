@@ -3,7 +3,7 @@ import requests
 from dotenv import load_dotenv
 from terminaltables import DoubleTable
 
-programming_languages = [
+PROGRAMMING_LANGUAGES = [
     'TypeScript',
     'Swift',
     'Scala',
@@ -76,7 +76,7 @@ def get_hh_mean_salary(language):
 
 def head_hunter_salaries():
     salaries_by_language={}
-    for language in programming_languages:
+    for language in PROGRAMMING_LANGUAGES:
         salaries_by_language[language] = get_hh_mean_salary(language)
 
     return ('HeadHunter Moscow', salaries_by_language)
@@ -123,7 +123,7 @@ def get_sj_mean_salaries(language):
 
 def supejob_salaries():
     salaries_by_language={}
-    for language in programming_languages:
+    for language in PROGRAMMING_LANGUAGES:
         salaries_by_language[language] = get_sj_mean_salaries(language)
     return ('SuperJob Moscow', salaries_by_language)
 
