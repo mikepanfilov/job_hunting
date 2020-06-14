@@ -107,18 +107,16 @@ def get_sj_mean_salaries(superjob_key,language):
         page += 1
         more = results['more']
 
+        final_results={
+                'vacancies_found': results['total'],
+                'vacancies_processed': len(predicted_salaries)
+        }
         if len(predicted_salaries) != 0:
-            return {
-                'vacancies_found':results['total'],
-                'vacancies_processed': len(predicted_salaries),
-                'average_salary': int(sum(predicted_salaries) / len(predicted_salaries)),
-            }
+            final_results['average_salary'] = int(sum(predicted_salaries) / len(predicted_salaries))
         else:
-            return {
-                'vacancies_found':results['total'],
-                'vacancies_processed': len(predicted_salaries),
-                'average_salary': 0,
-            }
+            final_results['average_salary'] = 0
+
+        return final_results
 
 def supejob_salaries(superjob_key):
     salaries_by_language={}
